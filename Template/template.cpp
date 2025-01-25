@@ -15,6 +15,28 @@ using namespace std;
 #define allr(x) (x).rbegin(), (x).rend()
 #define ll long long
 
+//for finding nCr for a combination using pascal's triangle
+int nCr(int n, int r) {
+    // Create a DP table to store intermediate results
+    vector<vector<int>> dp(n + 1, vector<int>(r + 1, 0));
+
+    // Populate the DP table
+    for (int i = 0; i <= n; ++i) {
+        for (int j = 0; j <= min(i, r); ++j) {
+            // Base cases
+            if (j == 0 || j == i) {
+                dp[i][j] = 1;
+            } else {
+                // Pascal's Triangle relation
+                dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
+            }
+        }
+    }
+
+    return dp[n][r];
+}
+
+
 //to find the most significant bits of a number
 int msbSignificance(int n) {
     int index = floor(log2(n));
@@ -170,6 +192,7 @@ void solve()
 {
      
 }
+
 
 int32_t main()
 {
